@@ -55,13 +55,6 @@ class Category
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title;
 
-    /**
-     * Slug.
-     *
-     * @var string|null
-     */
-    #[ORM\Column(type: 'string', length: 64)]
-    private ?string $slug;
 
     /**
      * Getter for Id.

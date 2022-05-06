@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Class Task.
  *
- * @psalm-suppress MissingConstructor
  */
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 #[ORM\Table(name: 'tasks')]
@@ -55,6 +54,15 @@ class Task
      */
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title = null;
+
+    /**
+     * Category.
+     *
+     * @var Category
+     */
+    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     /**
      * Getter for Id.
@@ -124,5 +132,17 @@ class Task
     public function setTitle(?string $title): void
     {
         $this->title = $title;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }
