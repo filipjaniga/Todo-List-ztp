@@ -48,7 +48,7 @@
       </trans-unit>
       <trans-unit id="action.back_to_list">
         <source>action.back_to_list</source>
-        <target>Powrót do listy zadań</target>
+        <target>Powrót do listy</target>
       </trans-unit>
     </body>
   </file>

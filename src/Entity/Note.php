@@ -1,21 +1,21 @@
 <?php
 /**
- * Task entity.
+ * Note entity.
  */
 
 namespace App\Entity;
 
-use App\Repository\TaskRepository;
+use App\Repository\NoteRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Task.
+ * Class Note.
  *
  */
-#[ORM\Entity(repositoryClass: TaskRepository::class)]
-#[ORM\Table(name: 'tasks')]
-class Task
+#[ORM\Entity(repositoryClass: NoteRepository::class)]
+#[ORM\Table(name: 'notes')]
+class Note
 {
     /**
      * Primary key.
@@ -26,6 +26,22 @@ class Task
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id = null;
+
+    /**
+     * Title.
+     *
+     * @var string|null
+     */
+    #[ORM\Column(type: 'string', length: 255)]
+    private ?string $title = null;
+
+    /**
+     * Content.
+     *
+     * @var string|null
+     */
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $content = null;
 
     /**
      * Created at.
@@ -44,23 +60,6 @@ class Task
     private ?DateTimeImmutable $updatedAt;
 
     /**
-     * Title.
-     *
-     * @var string|null
-     */
-    #[ORM\Column(type: 'string', length: 255)]
-    private ?string $title = null;
-
-    /**
-     * Category.
-     *
-     * @var Category
-     */
-    #[ORM\ManyToOne(targetEntity: Category::class)]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Category $category = null;
-
-    /**
      * Getter for Id.
      *
      * @return int|null Id
@@ -68,6 +67,50 @@ class Task
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * Getter for title.
+     *
+     * @return string|null Title
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * Setter fot title.
+     *
+     * @param string|null $title Title
+     */
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Getter for content.
+     *
+     * @return string|null Content
+     */
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    /**
+     * Setter for content.
+     *
+     * @param string|null $content Content
+     */
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
     }
 
     /**
@@ -108,37 +151,5 @@ class Task
     public function setUpdatedAt(?DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
-    }
-
-    /**
-     * Getter for title.
-     *
-     * @return string|null Title
-     */
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    /**
-     * Setter for title.
-     *
-     * @param string|null $title Title
-     */
-    public function setTitle(?string $title): void
-    {
-        $this->title = $title;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
     }
 }

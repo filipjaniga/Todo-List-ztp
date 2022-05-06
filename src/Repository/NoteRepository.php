@@ -1,26 +1,26 @@
 <?php
 /**
- * Task repository.
+ * Note repository.
  */
 
 namespace App\Repository;
 
-use App\Entity\Task;
+use App\Entity\Note;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * Class TaskRepository.
+ * Class NoteRepository.
  *
- * @method Task|null find($id, $lockMode = null, $lockVersion = null)
- * @method Task|null findOneBy(array $criteria, array $orderBy = null)
- * @method Task[]    findAll()
- * @method Task[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Note|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Note|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Note[]    findAll()
+ * @method Note[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @extends ServiceEntityRepository<Task>
+ *@extends ServiceEntityRepository<Note>
  */
-class TaskRepository extends ServiceEntityRepository
+class NoteRepository extends ServiceEntityRepository
 {
     /**
      * Items per page.
@@ -40,7 +40,7 @@ class TaskRepository extends ServiceEntityRepository
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Task::class);
+        parent::__construct($registry, Note::class);
     }
 
     /**
@@ -51,9 +51,7 @@ class TaskRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->select('task', 'category')
-            ->join('task.category', 'category')
-            ->orderBy('task.updatedAt', 'DESC');
+            ->orderBy('note.updatedAt', 'DESC');
     }
 
     /**
@@ -65,6 +63,6 @@ class TaskRepository extends ServiceEntityRepository
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
-        return $queryBuilder ?? $this->createQueryBuilder('task');
+        return $queryBuilder ?? $this->createQueryBuilder('note');
     }
 }

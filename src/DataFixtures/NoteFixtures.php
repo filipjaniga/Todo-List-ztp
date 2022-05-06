@@ -1,22 +1,19 @@
 <?php
 /**
- * Task fixtures.
+ * Note fixtures.
  */
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
-use App\Entity\Enum\TaskStatus;
-use App\Entity\Tag;
-use App\Entity\Task;
-use App\Entity\User;
+
+use App\Entity\Note;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 /**
- * Class TaskFixtures.
+ * Class NoteFixtures.
  */
-class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
+class NoteFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
      * Load data.
@@ -27,24 +24,22 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             return;
         }
 
-        $this->createMany(100, 'tasks', function (int $i) {
-            $task = new Task();
-            $task->setTitle($this->faker->sentence);
-            $task->setCreatedAt(
+        $this->createMany(100, 'notes', function (int $i) {
+            $note = new Note();
+            $note->setTitle($this->faker->sentence);
+            $note->setContent($this->faker->realText);
+            $note->setCreatedAt(
                 DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
-            $task->setUpdatedAt(
+            $note->setUpdatedAt(
                 DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
                 )
             );
-            /** @var Category $category */
-            $category = $this->getRandomReference('categories');
-            $task->setCategory($category);
 
-            return $task;
+            return $note;
         });
 
         $this->manager->flush();
