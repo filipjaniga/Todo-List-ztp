@@ -51,7 +51,10 @@ class NoteRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('note.updatedAt', 'DESC');
+            ->select(
+                'partial note.{id, createdAt, updatedAt, title}',
+            )
+            ->orderBy('note.id', 'ASC');
     }
 
     /**

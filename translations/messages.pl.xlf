@@ -24,15 +24,15 @@
       </trans-unit>
       <trans-unit id="label.created_at">
         <source>label.created_at</source>
-        <target>Utworzone</target>
+        <target>Utworzono</target>
       </trans-unit>
       <trans-unit id="label.updated_at">
         <source>label.updated_at</source>
-        <target>Zaktualizowane</target>
+        <target>Zaktualizowano</target>
       </trans-unit>
       <trans-unit id="title.task_list">
         <source>title.task_list</source>
-        <target>Lista zadań</target>
+        <target>Zadania</target>
       </trans-unit>
       <trans-unit id="title.task_details">
         <source>title.task_details</source>
@@ -49,6 +49,22 @@
       <trans-unit id="action.back_to_list">
         <source>action.back_to_list</source>
         <target>Powrót do listy</target>
+      </trans-unit>
+      <trans-unit id="title.note_list">
+        <source>title.note_list</source>
+        <target>Notatki</target>
+      </trans-unit>
+      <trans-unit id="action.go_to_notes">
+        <source>action.go_to_notes</source>
+        <target>Notatki</target>
+      </trans-unit>
+      <trans-unit id="action.go_to_tasks">
+        <source>action.go_to_tasks</source>
+        <target>Zadania</target>
+      </trans-unit>
+      <trans-unit id="title.note_details">
+        <source>title.note_details</source>
+        <target>Szczegóły notatki nr %id%</target>
       </trans-unit>
     </body>
   </file>

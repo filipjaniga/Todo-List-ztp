@@ -130,11 +130,22 @@ class Task
         $this->title = $title;
     }
 
+    /**
+     * Getter for Category.
+     *
+     * @return Category|null
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * Setter for Category.
+     *
+     * @param Category|null $category
+     * @return $this
+     */
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
