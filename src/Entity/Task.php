@@ -56,7 +56,7 @@ class Task
      *
      * @var Category
      */
-    #[ORM\ManyToOne(targetEntity: Category::class)]
+    #[ORM\ManyToOne(targetEntity: Category::class, fetch: 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 

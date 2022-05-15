@@ -49,7 +49,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->select(
                 'partial category.{id, createdAt, updatedAt, title}',
             )
-            ->orderBy('category.updatedAt', 'DESC');
+            ->orderBy('category.id', 'ASC');
     }
 
     /**
