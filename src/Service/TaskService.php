@@ -5,6 +5,7 @@
 
 namespace App\Service;
 
+use App\Entity\Task;
 use App\Repository\TaskRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -50,5 +51,20 @@ class TaskService implements TaskServiceInterface
             $page,
             TaskRepository::PAGINATOR_ITEMS_PER_PAGE
         );
+    }
+
+    /**
+     * Save entity.
+     *
+     * @param Task $task Task entity
+     */
+    public function save(Task $task): void
+    {
+        if ($task->getId() == null) {
+            $task->setCreatedAt(new \DateTimeImmutable());
+        }
+        $task->setUpdatedAt(new \DateTimeImmutable());
+
+        $this->taskRepository->save($task);
     }
 }

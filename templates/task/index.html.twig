@@ -3,8 +3,10 @@
 {% block title %}
     {{ 'title.task_list'|trans }}
 {% endblock %}
-
 {% block body %}
+    <a href="{{ url('task_create') }}" title="{{ 'action.create'|trans }}">
+        {{ 'action.create'|trans }}
+    </a>
     <h1>{{ 'title.task_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
 

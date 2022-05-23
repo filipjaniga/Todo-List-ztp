@@ -18,7 +18,7 @@ class TaskControllerTest extends WebTestCase
      *
      * @const string
      */
-    public const TEST_ROUTE = '/task';
+    public const TEST_ROUTE = '/category';
 
     /**
      * Test client.
@@ -48,4 +48,5 @@ class TaskControllerTest extends WebTestCase
         // then
         $this->assertEquals($expectedStatusCode, $resultStatusCode);
     }
+
 }
