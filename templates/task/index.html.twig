@@ -3,14 +3,16 @@
 {% block title %}
     {{ 'title.task_list'|trans }}
 {% endblock %}
+
 {% block body %}
+    <h1>{{ 'title.task_list'|trans }}</h1>
+    
     <a href="{{ url('task_create') }}" title="{{ 'action.create'|trans }}">
         {{ 'action.create'|trans }}
     </a>
-    <h1>{{ 'title.task_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
 
-        <div class="navigation text-center">
+        <div class="d-flex navigation justify-content-center">
             {{ knp_pagination_render(pagination) }}
         </div>
 
@@ -21,7 +23,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'task.createdAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'task.updatedAt') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'task.title') }}</th>
-                <th>{{ 'label.category'|trans }}</th>
+                <th>{{ 'label.task'|trans }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
@@ -37,19 +39,26 @@
                         <a href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
+                        <a href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'action.edit'|trans }}">
+                            {{ 'action.edit'|trans }}
+                        </a>
+                        <a href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
+                            {{ 'action.delete'|trans }}
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
 
-        <div class="navigation text-center">
+        <div class="d-flex navigation justify-content-center">
             {{ knp_pagination_render(pagination) }}
         </div>
 
     {% else %}
-        <p>
-            {{ 'message.empty_list'|trans }}
-        </p>
+        {% include 'default/_single_alert_message.html.twig' with {
+            type: 'warning',
+            message: 'message.empty_list'|trans
+        } %}
     {% endif %}
 {% endblock %}

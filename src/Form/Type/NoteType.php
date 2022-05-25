@@ -1,22 +1,21 @@
 <?php
 /**
- * Task type.
+ * Note type.
  */
 
 namespace App\Form\Type;
 
-use App\Entity\Category;
-use App\Entity\Task;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Note;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class TaskType.
+ * Class NoteType.
  */
-class TaskType extends AbstractType
+class NoteType extends AbstractType
 {
     /**
      * Builds the form.
@@ -36,19 +35,17 @@ class TaskType extends AbstractType
             [
                 'label' => 'label.title',
                 'required' => true,
-                'attr' => ['max_length' => 64],
+                'attr' => ['max_length' => 255],
             ]);
         $builder->add(
-            'category',
-            EntityType::class,
+            'content',
+            TextareaType::class,
             [
-                'class' => Category::class,
-                'choice_label' => function ($category) {
-                    return $category->getTitle();
-                },
-                'label' => 'label_category',
-                'required' => true,
-            ]);
+               'label' => 'label.content',
+               'required' => 'true',
+               'attr' => ['max_length' => 10000]
+            ]
+        );
     }
 
     /**
@@ -56,7 +53,7 @@ class TaskType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Task::class]);
+        $resolver->setDefaults(['data_class' => Note::class]);
     }
 
     /**
@@ -69,6 +66,6 @@ class TaskType extends AbstractType
      */
     public function getBlockPrefix(): string
     {
-        return 'task';
+        return 'note';
     }
 }

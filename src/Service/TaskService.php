@@ -5,6 +5,7 @@
 
 namespace App\Service;
 
+use App\Entity\Category;
 use App\Entity\Task;
 use App\Repository\TaskRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -60,11 +61,22 @@ class TaskService implements TaskServiceInterface
      */
     public function save(Task $task): void
     {
-        if ($task->getId() == null) {
+        if (NULL == $task->getId()) {
             $task->setCreatedAt(new \DateTimeImmutable());
         }
         $task->setUpdatedAt(new \DateTimeImmutable());
 
         $this->taskRepository->save($task);
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Task $task Task Entity
+     */
+
+    public function delete(Task $task): void
+    {
+        $this->taskRepository->delete($task);
     }
 }

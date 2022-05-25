@@ -68,4 +68,27 @@ class NoteRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('note');
     }
+
+    /**
+     * Save entity.
+     *
+     * @param Note $note Note entity
+     */
+    public function save(Note $note): void
+    {
+        $this->_em->persist($note);
+        $this->_em->flush();
+    }
+
+    /**
+     * Delete entity.
+     *
+     * @param Note $note Note entity
+     */
+    public function delete(Note $note): void
+    {
+        $this->_em->remove($note);
+        $this->_em->flush();
+    }
+
 }

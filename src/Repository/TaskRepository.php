@@ -81,4 +81,15 @@ class TaskRepository extends ServiceEntityRepository
         $this->_em->persist($task);
         $this->_em->flush();
     }
+
+    /**
+     * Delete entity.
+     *
+     * @param Task $task Task entity
+     */
+    public function delete(Task $task): void
+    {
+        $this->_em->remove($task);
+        $this->_em->flush();
+    }
 }
