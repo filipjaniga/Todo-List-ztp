@@ -6,6 +6,7 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Entity\User;
 use App\Form\Type\TaskType;
 use App\Service\TaskServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,11 +53,19 @@ class TaskController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(name: 'task_index', methods: 'GET')]
+    #[Route(
+        name: 'task_index',
+        methods: 'GET'
+    )]
     public function index(Request $request): Response
     {
+        $filters = $this->getFilters($request);
+        /** @var User $user */
+        $user = $this->getUser();
         $pagination = $this->taskService->getPaginatedList(
-            $request->query->getInt('page', 1)
+            $request->query->getInt('page', 1),
+            $user,
+            $filters
         );
 
         return $this->render('task/index.html.twig', ['pagination' => $pagination]);
@@ -87,15 +96,18 @@ class TaskController extends AbstractController
      *
      * @return Response HTTP response
      */
-    #[Route(
-        '/create',
-        name: 'task_create',
-        methods: 'GET|POST',
-    )]
+    #[Route('/create', name: 'task_create', methods: 'GET|POST')]
     public function create(Request $request): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
         $task = new Task();
-        $form = $this->createForm(TaskType::class, $task);
+        $task->setAuthor($user);
+        $form = $this->createForm(
+            TaskType::class,
+            $task,
+            ['action' => $this->generateUrl('task_create')]
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -109,10 +121,9 @@ class TaskController extends AbstractController
             return $this->redirectToRoute('task_index');
         }
 
-        return $this->render(
-            'task/create.html.twig',
-            ['form' => $form->createView()]
-        );
+        return $this->render('task/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 
@@ -190,6 +201,23 @@ class TaskController extends AbstractController
                 'task' => $task,
             ]
         );
+    }
+
+    /**
+     * Get filters from request.
+     *
+     * @param Request $request HTTP request
+     *
+     * @return array<string, int> Array of filters
+     *
+     * @psalm-return array{category_id: int, tag_id: int, status_id: int}
+     */
+    private function getFilters(Request $request): array
+    {
+        $filters = [];
+        $filters['category_id'] = $request->query->getInt('filters_category_id');
+
+        return $filters;
     }
 
 }

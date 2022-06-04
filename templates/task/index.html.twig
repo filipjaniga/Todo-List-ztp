@@ -7,14 +7,14 @@
 {% block body %}
     <h1>{{ 'title.task_list'|trans }}</h1>
     
-    <a href="{{ url('task_create') }}" title="{{ 'action.create'|trans }}">
+    <a class="btn btn-primary" href="{{ url('task_create') }}" title="{{ 'action.create'|trans }}" role="button">
         {{ 'action.create'|trans }}
     </a>
     {% if pagination is defined and pagination.items|length %}
 
-        <div class="d-flex navigation justify-content-center">
-            {{ knp_pagination_render(pagination) }}
-        </div>
+{#        <div class="d-flex navigation justify-content-center">#}
+{#            {{ knp_pagination_render(pagination) }}#}
+{#        </div>#}
 
         <table class="table table-striped">
             <thead>
@@ -29,20 +29,22 @@
             </thead>
             <tbody>
             {% for task in pagination.items %}
-                <tr>
+                <tr class="align-middle">
                     <td>{{ task.id }}</td>
                     <td>{{ task.createdAt|format_date('long') }}</td>
                     <td>{{ task.updatedAt|format_date('long') }}</td>
                     <td>{{ task.title }}</td>
-                    <td>{{ task.category.title }}</td>
+                    <td><a href="{{ url('task_index', {'filters.category_id' : task.category.id}) }}" title="{{ task.category.title }}"> {{ task.category.title }}
+                        </a>
+                    </td>
                     <td>
-                        <a href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">
+                        <a class="btn btn-primary" href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
-                        <a href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'action.edit'|trans }}">
+                        <a class="btn btn-secondary" href="{{ url('task_edit', {id: task.id}) }}" title="{{ 'action.edit'|trans }}">
                             {{ 'action.edit'|trans }}
                         </a>
-                        <a href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
+                        <a class="btn btn-danger" href="{{ url('task_delete', {id: task.id}) }}" title="{{ 'action.delete'|trans }}">
                             {{ 'action.delete'|trans }}
                         </a>
                     </td>

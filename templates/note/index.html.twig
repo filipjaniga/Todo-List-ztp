@@ -7,15 +7,15 @@
 {% block body %}
     <h1>{{ 'title.note_list'|trans }}</h1>
 
-    <a href="{{ url('note_create') }}" title="{{ 'action.create'|trans }}">
+    <a class="btn btn-primary" href="{{ url('note_create') }}" title="{{ 'action.create'|trans }}" role="button">
         {{ 'action.create'|trans }}
     </a>
 
     {% if pagination is defined and pagination.items|length %}
 
-        <div class="navigation text-center">
-            {{ knp_pagination_render(pagination) }}
-        </div>
+{#        <div class="navigation text-center">#}
+{#            {{ knp_pagination_render(pagination) }}#}
+{#        </div>#}
 
         <table class="table table-striped">
             <thead>
@@ -29,19 +29,19 @@
             </thead>
             <tbody>
             {% for note in pagination.items %}
-                <tr>
+                <tr class="align-middle">
                     <td>{{ note.id }}</td>
                     <td>{{ note.createdAt|format_date('long') }}</td>
                     <td>{{ note.updatedAt|format_date('long') }}</td>
                     <td>{{ note.title }}</td>
                     <td>
-                        <a href="{{ url('note_show', {id: note.id}) }}" title="{{ 'action.show'|trans }}">
+                        <a class="btn btn-primary" href="{{ url('note_show', {id: note.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
-                        <a href="{{ url('note_edit', {id: note.id}) }}" title="{{ 'action.edit'|trans }}">
+                        <a class="btn btn-secondary" href="{{ url('note_edit', {id: note.id}) }}" title="{{ 'action.edit'|trans }}">
                             {{ 'action.edit'|trans }}
                         </a>
-                        <a href="{{ url('note_delete', {id: note.id}) }}" title="{{ 'action.delete'|trans }}">
+                        <a class="btn btn-danger" href="{{ url('note_delete', {id: note.id}) }}" title="{{ 'action.delete'|trans }}">
                             {{ 'action.delete'|trans }}
                         </a>
                     </td>
@@ -50,7 +50,7 @@
             </tbody>
         </table>
 
-        <div class="navigation text-center">
+        <div class="d-flex navigation justify-content-center">
             {{ knp_pagination_render(pagination) }}
         </div>
 

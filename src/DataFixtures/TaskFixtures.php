@@ -29,7 +29,7 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
 
         $this->createMany(100, 'tasks', function (int $i) {
             $task = new Task();
-            $task->setTitle($this->faker->text());
+            $task->setTitle($this->faker->sentence);
             $task->setCreatedAt(
                 DateTimeImmutable::createFromMutable(
                     $this->faker->dateTimeBetween('-100 days', '-1 days')
@@ -46,6 +46,10 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
             $category = $this->getRandomReference('categories');
             $task->setCategory($category);
 
+            /** @var User $author */
+            $author = $this->getRandomReference('admins');
+            $task->setAuthor($author);
+
             return $task;
         });
 
@@ -58,10 +62,10 @@ class TaskFixtures extends AbstractBaseFixtures implements DependentFixtureInter
      *
      * @return string[] of dependencies
      *
-     * @psalm-return array{0: CategoryFixtures::class}
+     * @psalm-return array{0: CategoryFixtures::class, 1: UserFixtures::class}
      */
     public function getDependencies(): array
     {
-        return [CategoryFixtures::class];
+        return [CategoryFixtures::class,  UserFixtures::class];
     }
 }

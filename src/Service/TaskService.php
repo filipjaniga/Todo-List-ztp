@@ -5,8 +5,8 @@
 
 namespace App\Service;
 
-use App\Entity\Category;
 use App\Entity\Task;
+use App\Entity\User;
 use App\Repository\TaskRepository;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -27,15 +27,24 @@ class TaskService implements TaskServiceInterface
     private PaginatorInterface $paginator;
 
     /**
+     * Category service.
+     */
+    private CategoryServiceInterface $categoryService;
+
+    /**
      * Constructor.
      *
      * @param TaskRepository     $taskRepository Task repository
      * @param PaginatorInterface $paginator      Paginator
+     * @param CategoryServiceInterface $categoryService Category service
      */
-    public function __construct(TaskRepository $taskRepository, PaginatorInterface $paginator)
+    public function __construct(TaskRepository $taskRepository,
+                                PaginatorInterface $paginator,
+                                CategoryServiceInterface $categoryService)
     {
         $this->taskRepository = $taskRepository;
         $this->paginator = $paginator;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -78,5 +87,25 @@ class TaskService implements TaskServiceInterface
     public function delete(Task $task): void
     {
         $this->taskRepository->delete($task);
+    }
+
+    /**
+     * Prepare filters for the tasks list.
+     *
+     * @param array<string, int> $filters Raw filters from request
+     *
+     * @return array<string, object> Result array of filters
+     */
+    private function prepareFilters(array $filters): array
+    {
+        $resultFilters = [];
+        if (!empty($filters['category_id'])) {
+            $category = $this->categoryService->findOneById($filters['category_id']);
+            if (null !== $category) {
+                $resultFilters['category'] = $category;
+            }
+        }
+
+        return $resultFilters;
     }
 }

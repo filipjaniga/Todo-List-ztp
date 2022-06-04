@@ -7,14 +7,14 @@
 {% block body %}
     <h1>{{ 'title.category_list'|trans }}</h1>
 
-    <a href="{{ url('category_create') }}" title="{{ 'action.create'|trans }}">
+    <a class="btn btn-primary" href="{{ url('category_create') }}" title="{{ 'action.create'|trans }}" role="button">
         {{ 'action.create'|trans }}
     </a>
     {% if pagination is defined and pagination.items|length %}
 
-        <div class="navigation text-center">
-            {{ knp_pagination_render(pagination) }}
-        </div>
+{#        <div class="navigation text-center">#}
+{#            {{ knp_pagination_render(pagination) }}#}
+{#        </div>#}
 
         <table class="table table-striped">
             <thead>
@@ -28,19 +28,19 @@
             </thead>
             <tbody>
             {% for category in pagination.items %}
-                <tr class="justify-content-center">
+                <tr class="align-middle">
                     <td>{{ category.id }}</td>
                     <td>{{ category.createdAt|format_date('long') }}</td>
                     <td>{{ category.updatedAt|format_date('long') }}</td>
                     <td>{{ category.title }}</td>
                     <td>
-                        <a href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
+                        <a class="btn btn-primary" href="{{ url('category_show', {id: category.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
-                        <a href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action.edit'|trans }}">
+                        <a class="btn btn-secondary" href="{{ url('category_edit', {id: category.id}) }}" title="{{ 'action.edit'|trans }}">
                             {{ 'action.edit'|trans }}
                         </a>
-                        <a href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action.delete'|trans }}">
+                        <a class="btn btn-danger" href="{{ url('category_delete', {id: category.id}) }}" title="{{ 'action.delete'|trans }}">
                             {{ 'action.delete'|trans }}
                         </a>
                     </td>
@@ -49,7 +49,7 @@
             </tbody>
         </table>
 
-        <div class="navigation text-center">
+        <div class="d-flex navigation justify-content-center">
             {{ knp_pagination_render(pagination) }}
         </div>
 

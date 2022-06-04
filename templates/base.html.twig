@@ -11,11 +11,13 @@
                 rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
                 crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
     {% endblock %}
 </head>
 <body>
-<main role="main" class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<main role="main">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">ToDo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -39,6 +41,19 @@
                 </li>
             </ul>
         </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div style="padding-right: 2vw; color: whitesmoke">
+                {{ 'label.username'|trans }}
+                {{ app.user.email }}
+            </div>
+            <div>
+                <a class="btn btn-outline-light" href="{{ url('app_logout') }}">{{ 'action.logout'|trans }}</a>
+            </div>
+        {% else %}
+            <div>
+                <a class="link-light" href="{{ url('app_login') }}">{{ 'action.login'|trans }}</a>
+            </div>
+        {% endif %}
     </nav>
     <div class="container-fluid">
         {% include 'default/_flash_messages.html.twig' %}
