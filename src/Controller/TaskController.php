@@ -29,8 +29,6 @@ class TaskController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
 
@@ -38,7 +36,7 @@ class TaskController extends AbstractController
      * Constructor.
      *
      * @param TaskServiceInterface $taskService Task service
-     * @param TranslatorInterface $translator Translator
+     * @param TranslatorInterface  $translator  Translator
      */
     public function __construct(TaskServiceInterface $taskService, TranslatorInterface $translator)
     {
@@ -126,14 +124,13 @@ class TaskController extends AbstractController
         ]);
     }
 
-
-// ...
+    // ...
 
     /**
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Task $Task task entity
+     * @param Task    $Task    task entity
      *
      * @return Response HTTP response
      */
@@ -169,8 +166,8 @@ class TaskController extends AbstractController
     /**
      * Delete action.
      *
-     * @param Request  $request  HTTP request
-     * @param Task $task Task entity
+     * @param Request $request HTTP request
+     * @param Task    $task    Task entity
      *
      * @return Response HTTP response
      */
@@ -219,5 +216,4 @@ class TaskController extends AbstractController
 
         return $filters;
     }
-
 }

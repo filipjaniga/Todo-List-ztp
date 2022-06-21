@@ -10,13 +10,11 @@ use DateTimeImmutable;
 
 /**
  * Class CategoryFixtures.
- *
  */
 class CategoryFixtures extends AbstractBaseFixtures
 {
     /**
      * Load data.
-     *
      */
     public function loadData(): void
     {

@@ -61,7 +61,6 @@ class Category
     #[Assert\Length(min: 3, max: 64)]
     private ?string $title;
 
-
 //    /**
 //     * Slug.
 //     * @var string|null
@@ -69,7 +68,6 @@ class Category
 //    #[ORM\Column(type: 'string', length: 64)]
 //    #[Gedmo\Slug(fields: ['title'])]
 //    private ?string $slug;
-
 
     /**
      * Getter for Id.

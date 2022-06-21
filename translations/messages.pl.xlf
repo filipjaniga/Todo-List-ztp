@@ -94,6 +94,10 @@
         <source>action.create</source>
         <target>Utwórz</target>
       </trans-unit>
+      <trans-unit id="message.created.successfully">
+        <source>message.created.successfully</source>
+        <target>Utworzono pomyślnie</target>
+      </trans-unit>
 
     </body>
   </file>

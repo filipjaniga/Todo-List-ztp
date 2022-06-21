@@ -47,23 +47,23 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
-//    /**
-//     * Query tasks by author.
-//     *
-//     * @param UserInterface         $user    User entity
-//     * @param array<string, object> $filters Filters
-//     *
-//     * @return QueryBuilder Query builder
-//     */
-//    public function queryByAuthor(UserInterface $user, array $filters = []): QueryBuilder
-//    {
-//        $queryBuilder = $this->queryAll($filters);
-//
-//        $queryBuilder->andWhere('task.author = :author')
-//            ->setParameter('author', $user);
-//
-//        return $queryBuilder;
-//    }
+    /**
+     * Query tasks by author.
+     *
+     * @param UserInterface         $user    User entity
+     * @param array<string, object> $filters Filters
+     *
+     * @return QueryBuilder Query builder
+     */
+    public function queryByAuthor(UserInterface $user, array $filters = []): QueryBuilder
+    {
+        $queryBuilder = $this->queryAll($filters);
+
+        $queryBuilder->andWhere('task.author = :author')
+            ->setParameter('author', $user);
+
+        return $queryBuilder;
+    }
 
     /**
      * Count tasks by category.
@@ -89,19 +89,22 @@ class TaskRepository extends ServiceEntityRepository
     /**
      * Query all records.
      *
+     * @param array<string, object> $filters Filters
+     *
      * @return QueryBuilder Query builder
      */
-    public function queryAll(): QueryBuilder
+    public function queryAll(array $filters): QueryBuilder
     {
-        return $this->getOrCreateQueryBuilder()
+        $queryBuilder = $this->getOrCreateQueryBuilder()
             ->select(
                 'partial task.{id, createdAt, updatedAt, title}',
                 'partial category.{id, title}'
             )
             ->join('task.category', 'category')
             ->orderBy('task.updatedAt', 'DESC');
-    }
 
+        return $this->applyFiltersToList($queryBuilder, $filters);
+    }
 
     /**
      * Get or create new query builder.
@@ -137,22 +140,21 @@ class TaskRepository extends ServiceEntityRepository
         $this->_em->flush();
     }
 
+    /**
+     * Apply filters to paginated list.
+     *
+     * @param QueryBuilder          $queryBuilder Query builder
+     * @param array<string, object> $filters      Filters array
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
+    {
+        if (isset($filters['category']) && $filters['category'] instanceof Category) {
+            $queryBuilder->andWhere('category = :category')
+                ->setParameter('category', $filters['category']);
+        }
 
-//    /**
-//     * Apply filters to paginated list.
-//     *
-//     * @param QueryBuilder          $queryBuilder Query builder
-//     * @param array<string, object> $filters      Filters array
-//     *
-//     * @return QueryBuilder Query builder
-//     */
-//    private function applyFiltersToList(QueryBuilder $queryBuilder, array $filters = []): QueryBuilder
-//    {
-//        if (isset($filters['category']) && $filters['category'] instanceof Category) {
-//            $queryBuilder->andWhere('category = :category')
-//                ->setParameter('category', $filters['category']);
-//        }
-//
-//        return $queryBuilder;
-//    }
+        return $queryBuilder;
+    }
 }

@@ -11,7 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Class Note.
- *
  */
 #[ORM\Entity(repositoryClass: NoteRepository::class)]
 #[ORM\Table(name: 'notes')]

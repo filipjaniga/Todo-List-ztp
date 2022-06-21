@@ -8,6 +8,7 @@ namespace App\Service;
 use App\Entity\Task;
 use App\Entity\User;
 use App\Repository\TaskRepository;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -34,8 +35,8 @@ class TaskService implements TaskServiceInterface
     /**
      * Constructor.
      *
-     * @param TaskRepository     $taskRepository Task repository
-     * @param PaginatorInterface $paginator      Paginator
+     * @param TaskRepository           $taskRepository  Task repository
+     * @param PaginatorInterface       $paginator       Paginator
      * @param CategoryServiceInterface $categoryService Category service
      */
     public function __construct(TaskRepository $taskRepository,
@@ -50,14 +51,18 @@ class TaskService implements TaskServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int                $page    Page number
+     * @param User               $author  Tasks author
+     * @param array<string, int> $filters Filters array
      *
-     * @return PaginationInterface<string, mixed> Paginated list
+     * @return PaginationInterface<SlidingPagination> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface
+    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
     {
+        $filters = $this->prepareFilters($filters);
+
         return $this->paginator->paginate(
-            $this->taskRepository->queryAll(),
+            $this->taskRepository->queryByAuthor($author, $filters),
             $page,
             TaskRepository::PAGINATOR_ITEMS_PER_PAGE
         );
@@ -70,7 +75,7 @@ class TaskService implements TaskServiceInterface
      */
     public function save(Task $task): void
     {
-        if (NULL == $task->getId()) {
+        if (null == $task->getId()) {
             $task->setCreatedAt(new \DateTimeImmutable());
         }
         $task->setUpdatedAt(new \DateTimeImmutable());
@@ -83,7 +88,6 @@ class TaskService implements TaskServiceInterface
      *
      * @param Task $task Task Entity
      */
-
     public function delete(Task $task): void
     {
         $this->taskRepository->delete($task);

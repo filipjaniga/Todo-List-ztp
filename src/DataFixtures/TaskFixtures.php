@@ -6,8 +6,6 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
-use App\Entity\Enum\TaskStatus;
-use App\Entity\Tag;
 use App\Entity\Task;
 use App\Entity\User;
 use DateTimeImmutable;

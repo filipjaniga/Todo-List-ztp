@@ -90,5 +90,4 @@ class NoteRepository extends ServiceEntityRepository
         $this->_em->remove($note);
         $this->_em->flush();
     }
-
 }

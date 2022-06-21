@@ -73,7 +73,6 @@ class NoteService implements NoteServiceInterface
      *
      * @param Note $note Note Entity
      */
-
     public function delete(Note $note): void
     {
         $this->noteRepository->delete($note);

@@ -28,8 +28,6 @@ class NoteController extends AbstractController
 
     /**
      * Translator.
-     *
-     * @var TranslatorInterface
      */
     private TranslatorInterface $translator;
 
@@ -37,7 +35,7 @@ class NoteController extends AbstractController
      * Constructor.
      *
      * @param NoteServiceInterface $noteService Note service
-     * @param TranslatorInterface $translator Translator
+     * @param TranslatorInterface  $translator  Translator
      */
     public function __construct(NoteServiceInterface $noteService, TranslatorInterface $translator)
     {
@@ -118,8 +116,8 @@ class NoteController extends AbstractController
     /**
      * Edit action.
      *
-     * @param Request  $request  HTTP request
-     * @param Note $note Note entity
+     * @param Request $request HTTP request
+     * @param Note    $note    Note entity
      *
      * @return Response HTTP response
      */
@@ -155,8 +153,8 @@ class NoteController extends AbstractController
     /**
      * Delete action.
      *
-     * @param Request  $request  HTTP request
-     * @param Note $note Note entity
+     * @param Request $request HTTP request
+     * @param Note    $note    Note entity
      *
      * @return Response HTTP response
      */

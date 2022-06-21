@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Task.
- *
  */
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 #[ORM\Table(name: 'tasks')]
@@ -26,6 +25,7 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Assert\NotBlank]
     private ?int $id = null;
 
     /**
@@ -144,8 +144,6 @@ class Task
 
     /**
      * Getter for Category.
-     *
-     * @return Category|null
      */
     public function getCategory(): ?Category
     {
@@ -155,7 +153,6 @@ class Task
     /**
      * Setter for Category.
      *
-     * @param Category|null $category
      * @return $this
      */
     public function setCategory(?Category $category): self

@@ -17,11 +17,12 @@ interface TaskServiceInterface
     /**
      * Get paginated list.
      *
-     * @param int $page Page number
+     * @param int  $page   Page number
+     * @param User $author Tasks author
      *
      * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page): PaginationInterface;
+    public function getPaginatedList(int $page, User $author): PaginationInterface;
 
     /**
      * Save entity.
@@ -36,5 +37,4 @@ interface TaskServiceInterface
      * @param Task $task Task entity
      */
     public function delete(Task $task): void;
-
 }

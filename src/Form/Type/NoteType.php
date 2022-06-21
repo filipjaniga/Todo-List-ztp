@@ -43,7 +43,7 @@ class NoteType extends AbstractType
             [
                'label' => 'label.content',
                'required' => 'true',
-               'attr' => ['max_length' => 10000]
+               'attr' => ['max_length' => 10000],
             ]
         );
     }
@@ -61,8 +61,6 @@ class NoteType extends AbstractType
      *
      * The block prefix defaults to the underscored short class name with
      * the "Type" suffix removed (e.g. "UserProfileType" => "user_profile").
-     *
-     * @return string
      */
     public function getBlockPrefix(): string
     {

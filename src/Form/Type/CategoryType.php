@@ -51,8 +51,6 @@ class CategoryType extends AbstractType
      *
      * The block prefix defaults to the underscored short class name with
      * the "Type" suffix removed (e.g. "UserProfileType" => "user_profile").
-     *
-     * @return string
      */
     public function getBlockPrefix(): string
     {

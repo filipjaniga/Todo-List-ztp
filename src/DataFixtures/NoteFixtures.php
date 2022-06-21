@@ -5,7 +5,6 @@
 
 namespace App\DataFixtures;
 
-
 use App\Entity\Note;
 use DateTimeImmutable;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;

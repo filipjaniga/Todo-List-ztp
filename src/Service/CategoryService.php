@@ -33,14 +33,12 @@ class CategoryService implements CategoryServiceInterface
      */
     private PaginatorInterface $paginator;
 
-
     /**
      * Constructor.
      *
-     * @param CategoryRepository     $categoryRepository Category repository
-     * @param TaskRepository $taskRepository    Task repository
-     * @param PaginatorInterface $paginator      Paginator
-     *
+     * @param CategoryRepository $categoryRepository Category repository
+     * @param TaskRepository     $taskRepository     Task repository
+     * @param PaginatorInterface $paginator          Paginator
      */
     public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, TaskRepository $taskRepository)
     {
@@ -85,7 +83,6 @@ class CategoryService implements CategoryServiceInterface
      *
      * @param Category $category Category Entity
      */
-
     public function delete(Category $category): void
     {
         $this->categoryRepository->delete($category);
