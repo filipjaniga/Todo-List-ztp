@@ -124,13 +124,12 @@ class TaskController extends AbstractController
         ]);
     }
 
-    // ...
 
     /**
      * Edit action.
      *
      * @param Request $request HTTP request
-     * @param Task    $Task    task entity
+     * @param Task    $task    Task entity
      *
      * @return Response HTTP response
      */

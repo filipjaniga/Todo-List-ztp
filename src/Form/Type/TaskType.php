@@ -37,7 +37,8 @@ class TaskType extends AbstractType
                 'label' => 'label.title',
                 'required' => true,
                 'attr' => ['max_length' => 64],
-            ]);
+            ]
+        );
         $builder->add(
             'category',
             EntityType::class,
@@ -48,7 +49,8 @@ class TaskType extends AbstractType
                 },
                 'label' => 'label_category',
                 'required' => true,
-            ]);
+            ]
+        );
     }
 
     /**
