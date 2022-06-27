@@ -25,7 +25,6 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Assert\NotBlank]
     private ?int $id = null;
 
     /**
@@ -33,6 +32,7 @@ class Task
      *
      * @var DateTimeImmutable|null
      */
+    #[Assert\Type(DateTimeImmutable::class)]
     #[ORM\Column(type: 'datetime_immutable')]
     private ?DateTimeImmutable $createdAt;
 
@@ -41,6 +41,7 @@ class Task
      *
      * @var DateTimeImmutable|null
      */
+    #[Assert\Type(DateTimeImmutable::class)]
     #[ORM\Column(type: 'datetime_immutable')]
     private ?DateTimeImmutable $updatedAt;
 
@@ -50,6 +51,9 @@ class Task
      * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 255)]
     private ?string $title = null;
 
     /**
@@ -67,9 +71,6 @@ class Task
      * @var User|null
      */
     #[ORM\ManyToOne(targetEntity: User::class, fetch: 'EXTRA_LAZY')]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank]
-    #[Assert\Type(User::class)]
     private ?User $author;
 
     /**
@@ -144,6 +145,8 @@ class Task
 
     /**
      * Getter for Category.
+     *
+     * @return Category|null Category
      */
     public function getCategory(): ?Category
     {
@@ -152,6 +155,8 @@ class Task
 
     /**
      * Setter for Category.
+     *
+     * @param Category|null $category Category
      *
      * @return $this
      */
@@ -162,11 +167,23 @@ class Task
         return $this;
     }
 
+    /**
+     * Getter for Author.
+     *
+     * @return User|null Author
+     */
     public function getAuthor(): ?User
     {
         return $this->author;
     }
 
+    /**
+     * Setter for Author.
+     *
+     * @param User|null $author Author
+     *
+     * @return $this
+     */
     public function setAuthor(?User $author): self
     {
         $this->author = $author;

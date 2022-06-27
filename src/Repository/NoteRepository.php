@@ -58,18 +58,6 @@ class NoteRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('note');
-    }
-
-    /**
      * Save entity.
      *
      * @param Note $note Note entity
@@ -89,5 +77,17 @@ class NoteRepository extends ServiceEntityRepository
     {
         $this->_em->remove($note);
         $this->_em->flush();
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('note');
     }
 }

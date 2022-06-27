@@ -55,6 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 64)]
     private ?string $password;
 
     /**
@@ -90,7 +91,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * A visual identifier that represents this user.
      *
-     * @see UserInterface
+     * @return string Email
      */
     public function getUserIdentifier(): string
     {
@@ -98,7 +99,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     * Getter for Username.
+     *
+     * @return string Email
      */
     public function getUsername(): string
     {
@@ -158,6 +161,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
      * @see UserInterface
+     *
+     * @return null
      */
     public function getSalt(): ?string
     {

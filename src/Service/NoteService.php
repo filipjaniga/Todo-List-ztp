@@ -60,7 +60,7 @@ class NoteService implements NoteServiceInterface
      */
     public function save(Note $note): void
     {
-        if (null == $note->getId()) {
+        if (null === $note->getId()) {
             $note->setCreatedAt(new \DateTimeImmutable());
         }
         $note->setUpdatedAt(new \DateTimeImmutable());

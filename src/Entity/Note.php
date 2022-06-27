@@ -8,6 +8,7 @@ namespace App\Entity;
 use App\Repository\NoteRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Note.
@@ -32,6 +33,9 @@ class Note
      * @var string|null
      */
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 255)]
     private ?string $title = null;
 
     /**
@@ -40,6 +44,9 @@ class Note
      * @var string|null
      */
     #[ORM\Column(type: 'text', nullable: true)]
+    #[Assert\Type('string')]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 2000)]
     private ?string $content = null;
 
     /**
@@ -48,6 +55,7 @@ class Note
      * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Assert\Type(DateTimeImmutable::class)]
     private ?DateTimeImmutable $createdAt;
 
     /**
@@ -56,6 +64,7 @@ class Note
      * @var DateTimeImmutable|null
      */
     #[ORM\Column(type: 'datetime_immutable')]
+    #[Assert\Type(DateTimeImmutable::class)]
     private ?DateTimeImmutable $updatedAt;
 
     /**
@@ -79,9 +88,11 @@ class Note
     }
 
     /**
-     * Setter fot title.
+     * Setter for Title.
      *
-     * @param string|null $title Title
+     * @param string $title Title
+     *
+     * @return $this
      */
     public function setTitle(string $title): self
     {
@@ -91,7 +102,7 @@ class Note
     }
 
     /**
-     * Getter for content.
+     * Getter for Content.
      *
      * @return string|null Content
      */
@@ -101,9 +112,11 @@ class Note
     }
 
     /**
-     * Setter for content.
+     * Setter for Content.
      *
      * @param string|null $content Content
+     *
+     * @return $this
      */
     public function setContent(?string $content): self
     {

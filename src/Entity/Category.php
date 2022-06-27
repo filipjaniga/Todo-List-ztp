@@ -58,7 +58,7 @@ class Category
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Type('string')]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 3, max: 64)]
+    #[Assert\Length(min: 3, max: 255)]
     private ?string $title;
 
 //    /**
@@ -137,17 +137,5 @@ class Category
     public function setTitle(?string $title): void
     {
         $this->title = $title;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
     }
 }

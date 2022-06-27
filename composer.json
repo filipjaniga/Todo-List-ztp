@@ -14,6 +14,8 @@
         "doctrine/orm": "^2.12",
         "gedmo/doctrine-extensions": "^3.7",
         "knplabs/knp-paginator-bundle": "^5.8",
+        "league/flysystem": "^3.0",
+        "league/mime-type-detection": "^1.11",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.4",
         "sensio/framework-extra-bundle": "^6.1",
@@ -49,6 +51,7 @@
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^7.1",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "escapestudios/symfony2-coding-standard": "^3.12",
         "fakerphp/faker": "^1.19",
@@ -59,7 +62,7 @@
         "symfony/css-selector": "5.4.*",
         "symfony/debug-bundle": "5.4.*",
         "symfony/maker-bundle": "^1.40",
-        "symfony/phpunit-bridge": "^6.0",
+        "symfony/phpunit-bridge": "^6.1",
         "symfony/stopwatch": "5.4.*",
         "symfony/web-profiler-bundle": "5.4.*"
     },

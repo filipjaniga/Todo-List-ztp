@@ -98,7 +98,110 @@
         <source>message.created.successfully</source>
         <target>Utworzono pomyślnie</target>
       </trans-unit>
-
+      <trans-unit id="label.password_change">
+        <source>label.password_change</source>
+        <target>Zmień hasło</target>
+      </trans-unit>
+      <trans-unit id="title.user_edit">
+        <source>title.user_edit</source>
+        <target>Edycja danych użytkownika</target>
+      </trans-unit>
+      <trans-unit id="label.new_password">
+        <source>label.password</source>
+        <target>Nowe hasło</target>
+      </trans-unit>
+      <trans-unit id="label.repeat_new_password">
+        <source>label.repeat_password</source>
+        <target>Powtórz nowe hasło</target>
+      </trans-unit>
+      <trans-unit id="title.sign_in">
+        <source>title.sign_in</source>
+        <target>Zaloguj się</target>
+      </trans-unit>
+      <trans-unit id="label.email">
+        <source>label.email</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="label.password">
+        <source>label.password</source>
+        <target>Hasło</target>
+      </trans-unit>
+      <trans-unit id="label.sign_in">
+        <source>label.sign_in</source>
+        <target>Zaloguj</target>
+      </trans-unit>
+      <trans-unit id="message.created_successfully">
+        <source>message.created_successfully</source>
+        <target>Pomyślnie utworzono</target>
+      </trans-unit>
+      <trans-unit id="message.category_contains_tasks">
+        <source>message.category_contains_tasks</source>
+        <target>Do kategorii są przypisane zadania</target>
+      </trans-unit>
+      <trans-unit id="message.deleted_successfully">
+        <source>message.deleted_successfully</source>
+        <target>Pomyślnie usunięto</target>
+      </trans-unit>
+      <trans-unit id="action.login">
+        <source>action.login</source>
+        <target>Zaloguj</target>
+      </trans-unit>
+      <trans-unit id="title.category_create">
+        <source>title.category_create</source>
+        <target>Utwórz kategorię</target>
+      </trans-unit>
+      <trans-unit id="action.save">
+        <source>action.save</source>
+        <target>Zapisz</target>
+      </trans-unit>
+      <trans-unit id="title.category_delete">
+        <source>title.category_delete</source>
+        <target>Usuń kategorię</target>
+      </trans-unit>
+      <trans-unit id="title.category_edit">
+        <source>title.category_edit</source>
+        <target>Edytuj kategorię</target>
+      </trans-unit>
+      <trans-unit id="title.category_details">
+        <source>title.category_details</source>
+        <target>Szczegóły kategorii</target>
+      </trans-unit>
+      <trans-unit id="message.record_not_found">
+        <source>message.record_not_found</source>
+        <target>Nie znaleziono wyniku</target>
+      </trans-unit>
+      <trans-unit id="message.form_error">
+        <source>message.form_error</source>
+        <target>Błąd formularza</target>
+      </trans-unit>
+      <trans-unit id="title.note_create">
+        <source>title.note_create</source>
+        <target>Utwórz notatkę</target>
+      </trans-unit>
+      <trans-unit id="title.note_delete">
+        <source>title.note_delete</source>
+        <target>Usuń notatkę</target>
+      </trans-unit>
+      <trans-unit id="title.note_edit">
+        <source>title.note_edit</source>
+        <target>Edytuj notatkę</target>
+      </trans-unit>
+      <trans-unit id="title.task_create">
+        <source>title.task_create</source>
+        <target>Utwórz zadanie</target>
+      </trans-unit>
+      <trans-unit id="title.task_delete">
+        <source>title.task_delete</source>
+        <target>Usuń zadanie</target>
+      </trans-unit>
+      <trans-unit id="title.task_edit">
+        <source>title.task_edit</source>
+        <target>Edytuj zadanie</target>
+      </trans-unit>
+      <trans-unit id="message.updated_successfully">
+        <source>message.updated_successfully</source>
+        <target>Pomyślnie zaktualizowano</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

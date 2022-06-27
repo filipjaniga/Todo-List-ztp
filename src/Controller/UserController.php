@@ -8,13 +8,10 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\Type\UserType;
 use App\Service\UserServiceInterface;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -36,22 +33,15 @@ class UserController extends AbstractController
     private TranslatorInterface $translator;
 
     /**
-     * Password hasher.
-     */
-    private UserPasswordHasherInterface $passwordHasher;
-
-    /**
      * Constructor.
      *
-     * @param UserServiceInterface        $userService    User service
-     * @param TranslatorInterface         $translator     Translator
-     * @param UserPasswordHasherInterface $passwordHasher Password hasher
+     * @param UserServiceInterface $userService User service
+     * @param TranslatorInterface  $translator  Translator
      */
-    public function __construct(UserServiceInterface $userService, TranslatorInterface $translator, UserPasswordHasherInterface $passwordHasher)
+    public function __construct(UserServiceInterface $userService, TranslatorInterface $translator)
     {
         $this->userService = $userService;
         $this->translator = $translator;
-        $this->passwordHasher = $passwordHasher;
     }
 
     /**
@@ -67,7 +57,9 @@ class UserController extends AbstractController
         path: '/{id}/password_edit',
         name: 'user_edit',
         requirements: ['id' => '[1-9]\d*'],
-        methods: ['GET', 'PUT'])]
+        methods: ['GET', 'PUT']
+    )]
+    #[IsGranted('EDIT', subject: 'user')]
     public function changePassword(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $form = $this->createForm(UserType::class, $user, ['method' => 'PUT']);
@@ -84,7 +76,10 @@ class UserController extends AbstractController
             );
             $this->userService->save($user);
 
-            $this->addFlash('success', 'message_updated_successfully');
+            $this->addFlash(
+                'success',
+                $this->translator->trans('message.updated_successfully')
+            );
 
             return $this->redirectToRoute('task_index');
         }
@@ -96,7 +91,6 @@ class UserController extends AbstractController
                 'user' => $user,
             ]
         );
-
 
         return $this->render(
             'user/edit.html.twig',

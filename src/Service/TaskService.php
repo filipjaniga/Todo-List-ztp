@@ -6,9 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Task;
-use App\Entity\User;
 use App\Repository\TaskRepository;
-use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -39,11 +37,8 @@ class TaskService implements TaskServiceInterface
      * @param PaginatorInterface       $paginator       Paginator
      * @param CategoryServiceInterface $categoryService Category service
      */
-    public function __construct(
-        TaskRepository $taskRepository,
-        PaginatorInterface $paginator,
-        CategoryServiceInterface $categoryService
-    ) {
+    public function __construct(TaskRepository $taskRepository, PaginatorInterface $paginator, CategoryServiceInterface $categoryService)
+    {
         $this->taskRepository = $taskRepository;
         $this->paginator = $paginator;
         $this->categoryService = $categoryService;
@@ -53,17 +48,16 @@ class TaskService implements TaskServiceInterface
      * Get paginated list.
      *
      * @param int                $page    Page number
-     * @param User               $author  Tasks author
      * @param array<string, int> $filters Filters array
      *
-     * @return PaginationInterface<SlidingPagination> Paginated list
+     * @return PaginationInterface<string, mixed> Paginated list
      */
-    public function getPaginatedList(int $page, User $author, array $filters = []): PaginationInterface
+    public function getPaginatedList(int $page, array $filters = []): PaginationInterface
     {
         $filters = $this->prepareFilters($filters);
 
         return $this->paginator->paginate(
-            $this->taskRepository->queryByAuthor($author, $filters),
+            $this->taskRepository->queryAll($filters),
             $page,
             TaskRepository::PAGINATOR_ITEMS_PER_PAGE
         );
@@ -76,7 +70,7 @@ class TaskService implements TaskServiceInterface
      */
     public function save(Task $task): void
     {
-        if (null == $task->getId()) {
+        if (null === $task->getId()) {
             $task->setCreatedAt(new \DateTimeImmutable());
         }
         $task->setUpdatedAt(new \DateTimeImmutable());
@@ -101,7 +95,7 @@ class TaskService implements TaskServiceInterface
      *
      * @return array<string, object> Result array of filters
      */
-    private function prepareFilters(array $filters): array
+    public function prepareFilters(array $filters): array
     {
         $resultFilters = [];
         if (!empty($filters['category_id'])) {

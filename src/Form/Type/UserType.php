@@ -36,7 +36,7 @@ class UserType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'label.password'],
                 'second_options' => ['label' => 'label.repeat_password'],
-                'invalid_message' => 'You entered an invalid value'
+                'invalid_message' => 'You entered an invalid value',
             ]
         );
     }

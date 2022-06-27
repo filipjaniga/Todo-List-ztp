@@ -40,7 +40,7 @@ class CategoryService implements CategoryServiceInterface
      * @param TaskRepository     $taskRepository     Task repository
      * @param PaginatorInterface $paginator          Paginator
      */
-    public function __construct(CategoryRepository $categoryRepository, PaginatorInterface $paginator, TaskRepository $taskRepository)
+    public function __construct(CategoryRepository $categoryRepository, TaskRepository $taskRepository, PaginatorInterface $paginator)
     {
         $this->categoryRepository = $categoryRepository;
         $this->taskRepository = $taskRepository;
@@ -70,7 +70,7 @@ class CategoryService implements CategoryServiceInterface
      */
     public function save(Category $category): void
     {
-        if (null == $category->getId()) {
+        if (null === $category->getId()) {
             $category->setCreatedAt(new \DateTimeImmutable());
         }
         $category->setUpdatedAt(new \DateTimeImmutable());

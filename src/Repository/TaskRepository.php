@@ -47,23 +47,23 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
-    /**
-     * Query tasks by author.
-     *
-     * @param UserInterface         $user    User entity
-     * @param array<string, object> $filters Filters
-     *
-     * @return QueryBuilder Query builder
-     */
-    public function queryByAuthor(UserInterface $user, array $filters = []): QueryBuilder
-    {
-        $queryBuilder = $this->queryAll($filters);
-
-        $queryBuilder->andWhere('task.author = :author')
-            ->setParameter('author', $user);
-
-        return $queryBuilder;
-    }
+//    /**
+//     * Query tasks by author.
+//     *
+//     * @param UserInterface         $user    User entity
+//     * @param array<string, object> $filters Filters
+//     *
+//     * @return QueryBuilder Query builder
+//     */
+//    public function queryByAuthor(UserInterface $user, array $filters = []): QueryBuilder
+//    {
+//        $queryBuilder = $this->queryAll($filters);
+//
+//        $queryBuilder->andWhere('task.author = :author')
+//            ->setParameter('author', $user);
+//
+//        return $queryBuilder;
+//    }
 
     /**
      * Count tasks by category.
@@ -107,18 +107,6 @@ class TaskRepository extends ServiceEntityRepository
     }
 
     /**
-     * Get or create new query builder.
-     *
-     * @param QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('task');
-    }
-
-    /**
      * Save entity.
      *
      * @param Task $task Category entity
@@ -138,6 +126,18 @@ class TaskRepository extends ServiceEntityRepository
     {
         $this->_em->remove($task);
         $this->_em->flush();
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder Query builder
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
+        return $queryBuilder ?? $this->createQueryBuilder('task');
     }
 
     /**

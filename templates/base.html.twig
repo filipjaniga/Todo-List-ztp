@@ -43,7 +43,7 @@
         </div>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div style="padding-right: 1rem; color: whitesmoke">
-                <a href="{{ url('user_edit', {'id':app.user.id}) }}">{{'password_change'|trans}}</a>
+                <a href="{{ url('user_edit', {'id':app.user.id}) }}">{{'label.password_change'|trans}}</a>
                 {{ 'label.username'|trans }}
                 {{ app.user.email }}
             </div>
